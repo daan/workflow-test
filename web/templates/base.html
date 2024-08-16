@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="/style/normalize.css" rel="stylesheet" type="text/css">
+    <link href="/style/base.css" rel="stylesheet" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"> 
+    <meta charset="utf-8" />
+    <title>{{title}}</title>
+  </head>
+  <body>
+    <header>
+      <h1><a href="/"> {{ title }}</a></h1>
+    </header>
+    <nav>
+      <ul>
+        {% for f in examples.keys() %}
+        <li>
+          <h2><a href="/{{ f }}">{{ f }}</a></h2>
+          {% for e in examples[f] %}
+          <ul>
+            <li><a href="/{{ f }}/{{ e }}.html">{{ examples[f][e] }}</a></li>
+          </ul>
+          {% endfor %}
+        </li>
+        {% endfor %}
+      </ul>
+    </nav>      
+    <main>            
+      {% block content %}
+      {% endblock %}
+    </main>  
+    <footer>Contact me@mysite.com</footer>
+  </body>
+</html>

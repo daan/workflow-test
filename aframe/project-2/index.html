@@ -1,0 +1,86 @@
+<html>
+<head>
+    <title>My A-Frame Scene</title>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
+</head>
+<body>
+    <a-scene 
+             webxr="overlayElement:#dom-overlay; requiredFeatures: local-floor"
+             xr-mode-ui="XRMode:xr"
+             real-world-meshing="planesEnabled: false; meshMixin: xrmesh"
+             >
+              <script>
+AFRAME.registerComponent('add-cube-on-click', {
+  init: function () {
+    let el = this.el;
+    this.addCube = function() {
+      p = this.getAttribute('position');
+      const box = document.createElement("a-box");
+      box.setAttribute("color", "red");
+      box.setAttribute("position", p);
+      box.setAttribute("scale", "0.1 0.1 0.1");
+      const scene = document.querySelector("a-scene");
+      scene.appendChild(box);
+    }
+    this.el.addEventListener('triggerdown', this.addCube);
+
+  }
+});
+        </script>
+      <a-assets>
+        <a-mixin
+          id="xrmesh"
+          material="color: pink"
+          visible="true">
+        </a-mixin>
+      </a-assets>
+        <a-entity mixin="xrmesh"></a-entity>
+  <a-text
+            id="myText"
+            value="nothing is selected"
+            color="black"
+            align="center"
+            visible="false"
+            position="0 1.5 -2" ></a-text>
+        <a-box
+            color="tomato"
+            add-sphere-above
+            position="0.5 1 -2"
+            scale="0.3 0.3 0.3"
+            event-set__text="_event: mouseenter; 
+                             _target: #myText; 
+                             visible: true; 
+                             value: red cube"
+            event-set__text_none="_event: mouseleave; 
+                                  _target: #myText; 
+                                  visible: false"
+            
+            event-set__click="color: springgreen"
+            event-set__mouseenter="scale: 0.4 0.4 0.4"
+            event-set__mouseleave="scale: 0.3 0.3 0.3"></a-box>
+
+        <a-box 
+            color="dodgerblue"
+            position="0 1 -2"
+            scale="0.3 0.3 0.3" 
+            event-set__click="color: red"
+            event-set__mouseenter="scale: 0.4 0.4 0.4; color: deepskyblue"
+            event-set__mouseleave="scale: 0.3 0.3 0.3; color: dodgerblue"
+
+            event-set__text="_event: mouseenter; _target: #myText; visible: true; value: blue cube"
+            event-set__text_none="_event: mouseleave; _target: #myText; visible: false"></a-box>
+        <a-camera><a-cursor></a-cursor></a-camera>
+
+        <a-entity add-cube-on-click id="left-hand" class="local-hand"  laser-controls="hand:left;">
+            <a-box  color="green" position="0 0 0" scale="0.1 0.1 0.1"></a-box>
+          </a-entity>  
+          <a-entity add-cube-on-click id="right-hand" class="local-hand"  laser-controls="hand:right;">
+            <a-box  color="red" position="0 0 0" scale="0.1 0.1 0.1"></a-box>
+                        
+
+          </a-entity>  
+
+    </a-scene>
+</body>
+</html>
