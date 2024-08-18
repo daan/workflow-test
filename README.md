@@ -1,8 +1,11 @@
-# Workflow Test
+# My Notes on webxr for designers
 
-This is a temporary test page for testing a publishing workflow with python/flask to github pages...
-asdfasfsadf
-sdf123
-asdf
-asdf
-asdf
+
+
+
+## building the documentation
+
+run locally using web/run.py
+build static website using web/freeze.py
+test static website in folder web\build python -m http.server 9000
+

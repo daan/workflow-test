@@ -4,7 +4,8 @@
 {{ framework }} {{ example }}
 <a href="/"> {{ title }}</a>
 
-<iframe src="{{ example }}/index.html" width="100%" height="500px"></iframe>
+<!-- <iframe src="{{ example }}/index.html" width="100%" height="500px"></iframe> -->
+<iframe src="{{url_for('framework_example_static_files', framework=framework, example=example, path = 'index.html')}}" width="100%" height="500px"></iframe>
 
 {{ content|safe }}
 {% endblock content %}
