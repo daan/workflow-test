@@ -4,4 +4,4 @@ from flask_frozen import Freezer
 freezer = Freezer(app)
 
 if __name__ == "__main__":
-    Freezer.freeze()
+    freezer.freeze()
